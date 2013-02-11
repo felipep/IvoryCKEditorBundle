@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE errlist SYSTEM "MESSAGES.DTD">
+<errlist>
+	<error code="1de" type="error">
+		<message msglang="de">
+			<standard>
+				<shortmsg></shortmsg>
+				<longmsg></longmsg>
+			</standard>
+			<expert>
+				<shortmsg></shortmsg>
+				<longmsg>Es gibt keine DOM-PHP-Erweiterung!</longmsg>
+			</expert>
+		</message>
+	</error>
+	<error code="2de" type="error">
+		<message msglang="de">
+			<standard>
+				<shortmsg></shortmsg>
+				<longmsg></longmsg>
+			</standard>
+			<expert>
+				<shortmsg></shortmsg>
+				<longmsg>Es gibt keine PHP-Klasse "NuSOAP"!</longmsg>
+			</expert>
+		</message>
+	</error>
+	<error code="3de" type="error">
+		<message msglang="de">
+			<standard>
+				<shortmsg></shortmsg>
+				<longmsg></longmsg>
+			</standard>
+			<expert>
+				<shortmsg></shortmsg>
+				<longmsg>Es gibt keine PEAR-Erweiterung "Net_DIME"!</longmsg>
+			</expert>
+		</message>
+	</error>
+	<error code="4de" type="error">
+		<message msglang="de">
+			<standard>
+				<shortmsg></shortmsg>
+				<longmsg></longmsg>
+			</standard>
+			<expert>
+				<shortmsg></shortmsg>
+				<longmsg>Kein Zugriff auf Wörterbuch Ordner!</longmsg>
+			</expert>
+		</message>
+	</error>
+	<error code="5de" type="error">
+		<message msglang="de">
+			<standard>
+				<shortmsg></shortmsg>
+				<longmsg></longmsg>
+			</standard>
+			<expert>
+				<shortmsg></shortmsg>
+				<longmsg>Ungültige Benutzer/Passwort-Kombination</longmsg>
+			</expert>
+		</message>
+	</error>
+	<error code="6de" type="error">
+		<message msglang="de">
+			<standard>
+				<shortmsg></shortmsg>
+				<longmsg></longmsg>
+			</standard>
+			<expert>
+				<shortmsg></shortmsg>
+				<longmsg>Konnte keine Verbindung zum DES Server herstellen.</longmsg>
+			</expert>
+		</message>
+	</error>	
+</errlist>

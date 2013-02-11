@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<loclist>
+	<loc code="loc001">
+		<message msglang="de">Benutzerwörterbuch anzeigen</message>	
+	</loc>
+	<loc code="loc002">
+		<message msglang="de">Korrektur starten</message>	
+	</loc>
+	<loc code="loc003">
+		<message msglang="de">Anmelden</message>	
+	</loc>
+	<loc code="loc004">
+		<message msglang="de">Nachschlagen</message>	
+	</loc>
+	<loc code="loc005">
+		<message msglang="de">Ausnahmewörterbuch anzeigen</message>	
+	</loc>
+	<loc code="loc006">
+		<message msglang="de">Optionen anzeigen</message>	
+	</loc>
+	<loc code="loc007">
+		<message msglang="de">Online in Duden-Werken nachschlagen (Duden-Suche)</message>	
+	</loc>
+	<loc code="loc008">
+		<message msglang="de">Korrigieren</message>	
+	</loc>
+	<loc code="loc009">
+		<message msglang="de">Benutzerwörterbuch</message>	
+	</loc>
+	<loc code="loc010">
+		<message msglang="de">Ausnahmewörterbuch</message>	
+	</loc>
+	<loc code="loc011">
+		<message msglang="de">Optionen</message>	
+	</loc>
+	<loc code="loc012">
+		<message msglang="de">Zum Benutzerwörterbuch hinzufügen</message>	
+	</loc>
+	<loc code="loc013">
+		<message msglang="de">Stop</message>	
+	</loc>
+	<loc code="loc014">
+		<message msglang="de">Editieren</message>	
+	</loc>
+	<loc code="loc015">
+		<message msglang="de">Prüfung erfolgt...</message>	
+	</loc>
+	<loc code="loc016">
+		<message msglang="de">Bitte warten...</message>	
+	</loc>
+	<loc code="loc017">
+		<message msglang="de">Keine Fehler gefunden.</message>	
+	</loc>
+	<loc code="loc018">
+		<message msglang="de">Die Authentifikation ist fehlgeschlagen. Bitte melden Sie sich mit Ihren Benutzernamen und Passwort an.</message>	
+	</loc>
+	<loc code="loc019">
+		<message msglang="de">In dem Eingabetext sind folgende Zeichen enthalten, die nicht verarbeitet werden können. Bitte entfernen oder ersetzen Sie diese Zeichen durch geeignete Zeichen:</message>	
+	</loc>
+	<loc code="loc020">
+		<message msglang="de">Ignorieren</message>	
+	</loc>
+	<loc code="loc021">
+		<message msglang="de">Alle ignorieren</message>	
+	</loc>
+	<loc code="loc022">
+		<message msglang="de">Das Wörterbuch wurde nicht gespeichert. Möchten Sie trotzdem fortfahren?</message>	
+	</loc>
+</loclist>

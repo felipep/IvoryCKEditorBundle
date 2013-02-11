@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+        <title>Duden Browser Proofing Tools Rechtschreibkorrektur</title>
+        <link rel="stylesheet" type="text/css" href="../css/dbpt1_0.css">
+        <script src="../js/jquery.min.js" type="text/javascript"></script> 
+        <script src="../js/setup.js" type="text/javascript"></script>
+        <script src="../js/cpaint2.inc.compressed.js" type="text/javascript"></script>
+        <script src="../js/dbpt1_0_ck.js" type="text/javascript"></script>
+        <script src="../js/jquery.cookie.js" type="text/javascript"></script>
+        <style type="text/css">
+            .skryt {
+                color: #3A00F4;
+                text-decoration: underline;
+            }           
+            li, ol {padding: 0 0 0 20px;}
+            #plugin {height: 500px;}
+        </style>
+        <script type="text/javascript">
+            var config = '';            
+            /* Initialize important CKEditor variables from opening editor. */
+            var CKEDITOR   = window.parent.CKEDITOR;
+            var eName = window.parent.ename;
+            var oEditor   = CKEDITOR.instances[eName];
+
+            var okListener = function(ev) {
+                hideCorrectionInput();
+                currObj.switchText();
+                $('#ta').hide();
+                $('#plugin').hide();
+                    
+                var data = document.getElementById("ta").value;
+                data = data.replace(/<a onclick="javascript:return false;" class="skryt" /gi, "<a ");
+                data = data.replace(/<!--br([^>]*)-->/gi, "<br$1>"); //!!!
+                data = data.replace(/&shy;/ig, "");
+                data = data.replace(/\xC2\xAD/ig, "");
+                data = data.replace(/&#173;/ig, "");//shy
+                data = data.replace(/&#xAD;/ig, "");//shy
+                data = data.replace(/­/ig, "");//shy
+                data = data.replace(/~/ig, "");
+                data = data.replace(/<[^\/>][^>]*><\/[^>]+>/gim, ""); //remove empty tag mafin 2012-04-05
+                // Insert the contents from the input into the document                                    
+                oEditor.setData(data);
+                if (currObj.wsSessionId) currObj.stopSession();
+
+                // remove the listeners to avoid any JS exceptions
+                CKEDITOR.dialog.getCurrent().removeListener("ok", okListener);
+                CKEDITOR.dialog.getCurrent().removeListener("cancel", cancelListener);
+            };
+
+            var cancelListener = function(ev) {
+                $('#ta').hide();
+                $('#plugin').hide();
+                if (currObj.wsSessionId) currObj.stopSession();
+                
+                // remove the listeners to avoid any JS exceptions
+                CKEDITOR.dialog.getCurrent().removeListener("ok", okListener);
+                CKEDITOR.dialog.getCurrent().removeListener("cancel", cancelListener);
+            };
+
+            CKEDITOR.event.implementOn(CKEDITOR.dialog.getCurrent());
+            CKEDITOR.dialog.getCurrent().on("ok", okListener);
+            CKEDITOR.dialog.getCurrent().on("cancel", cancelListener);
+            
+            //kvuli FF - nastavim vysku iframu
+            var dialogElement = CKEDITOR.dialog.getCurrent().getElement().getFirst();
+            dialogElement.setStyle("height", "600px");
+
+            $(document).ready(function() {
+				$.post("../loc.php", {},
+				function(data) {			
+					switch (data.status)			
+					{ 	
+						case 'ok' :		
+							loc = data.data;
+							setupSpellCheckers();
+							checkGuid();                  
+	                    
+							$('#ta').hide();
+							$('#plugin').hide();
+	                    
+							config = cookie_setup(config);
+							var data = oEditor.getData();
+	                    
+							//data = data.replace(/>\s*/g, ">"); // aby se nezpracovavali mezery apod. -20110901 odstraneno
+							data = data.replace(/\r/g, "");
+							data = data.replace(/\n/g, "");
+							data = data.replace(/<a /gi, "<a onclick=\"javascript:return false;\" class=\"skryt\" ");
+	
+							data = data.replace(/&ndash;/ig, '-');
+							data = data.replace(/<br([^>]*)>/ig, "~~~~<!--br$1-->"); //!!!
+							data = data.replace(/&shy;/ig, "");                    
+	
+							$("#ta").val(data);
+							selectSpellChecker(0);
+	
+							configure(config["lang"],
+							config["level"],
+							config["stylew"],
+							config["foreign_words"],
+							config["colloquial_words"],
+							config["dialect"],
+							config["obsolete_words"],
+							config["sentlength"]);
+							
+							check();
+							$('#plugin').show('slow');
+							$('#preload').fadeOut(4400);
+							break;
+						
+						case 'error' :
+							if (data.data) alert("[DBPT Error] " + data.data); 
+							CKEDITOR.dialog.getCurrent().hide();
+							return false;
+							break;	
+					}
+					
+					return true;
+				}, "json")
+				.error(function() { 
+					alert("[DBPT Error] XML parser error when parsing loc.xml file."); 
+					CKEDITOR.dialog.getCurrent().hide();
+					return false;
+					}
+				);
+                    
+			});                
+        </script>
+    </head>    
+    <body>
+        <div id="plugin">  
+            <textarea title="Correct_Opt_Login" id="ta" name="ta" cols="10" rows="20" style="width: 100%;height: 500px;"></textarea>
+        </div>
+        <div id="preload"><h1>Korrekturvorgang l&auml;uft, bitte warten...</h1></div>
+    </body>
+</html>

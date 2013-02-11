@@ -1,0 +1,35 @@
+<!-- XML DTD for message list files -->
+<!ELEMENT errlist (error*)>
+<!ELEMENT error (message+, example*)>
+<!ATTLIST error 
+          type (orth|gram|style|sent|term) #REQUIRED
+          code CDATA #REQUIRED >
+
+<!ENTITY % msgcont "(standard,expert)">
+<!ENTITY % msgtypes "(shortmsg, longmsg)">
+<!ENTITY % languages "(de|en|it|sp|fr|tu)">  
+
+<!ELEMENT message (category?,standard,expert?,link?)>
+<!ATTLIST message
+          msglang %languages; "de">
+
+<!ELEMENT category (#PCDATA)>
+
+<!ELEMENT standard %msgtypes; >
+<!ELEMENT expert   %msgtypes; >
+
+<!ELEMENT shortmsg (#PCDATA)>
+
+<!ELEMENT longmsg (#PCDATA)>
+
+<!ELEMENT link (#PCDATA)>
+<!ATTLIST link 
+          key CDATA #REQUIRED
+	  werk (D1|D9) "D1" >
+
+<!ELEMENT example (false, correct)>
+<!ATTLIST example
+          exlang %languages; "de" >
+
+<!ELEMENT false (#PCDATA)>
+<!ELEMENT correct (#PCDATA)>

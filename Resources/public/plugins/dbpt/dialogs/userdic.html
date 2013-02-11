@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+        <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+        <meta name="author" content="Macron Software (www.macronsoftware.com); petrj">
+        <meta name="copyright" content="Copyright (C) 2011 - Bibliographisches Institut GmbH, Mannheim, Germany. All rights reserved.">
+        <meta name="description" content="DBPT - user dictionary dialog">
+        <title>Wörterbücher</title>
+        <link rel="stylesheet" type="text/css" href="../css/dbpt1_0.css">
+        <script src="../js/jquery.min.js" type="text/javascript"></script> 
+        <script src="../js/setup.js" type="text/javascript"></script>         
+        <script src="../js/jquery.cookie.js" type="text/javascript"></script>        
+        <script src="../js/cpaint2.inc.compressed.js" type="text/javascript"></script>
+        <script src="../js/userdic.js" type="text/javascript"></script>        
+        <script type="text/javascript">            
+            var config = null;
+			var loc = null; 
+            //kvuli FF - nastavim vysku iframu
+            var CKEDITOR   = window.parent.CKEDITOR;
+            var dialogElement = CKEDITOR.dialog.getCurrent().getElement().getFirst();
+            dialogElement.setStyle("height", "600px");
+            $(document).ready(function() {
+                config = cookie_setup(config);
+                $.post("../loc.php", {},
+				function(data) {			
+                	switch (data.status)			
+					{ 	
+						case 'ok' :
+							loc = data.data;
+							initDict();
+							break;
+							
+						case 'error' :
+							alert("[DBPT Error] " + data.data); 
+							CKEDITOR.dialog.getCurrent().hide();
+							return false;
+							break;
+					}	
+							
+					return true;
+				}, "json")
+				.error(function() { 
+					alert("[DBPT Error] XML parser error when parsing loc.xml file."); 
+					CKEDITOR.dialog.getCurrent().hide();
+				}); 	
+                
+                $.post("../descheck.php", {
+					'lang' : DBPT_LANG
+				},
+				function(data){ 			
+					if (data.status == "ok") 
+					{
+						;
+					}
+					else {
+						alert('[DBPT Error] ' + data.msg);
+						CKEDITOR.dialog.getCurrent().hide();
+					}
+    					
+				}, "json")
+				.error(function() {
+					CKEDITOR.dialog.getCurrent().hide();
+				});
+            });
+        </script>
+    </head>
+    <body>
+        <div align="center">
+            <form id="userdic" action="" onsubmit="return false">
+                <table cellpadding="0" cellspacing="0" border="0" align="center" style="width:400px">
+                    <tr><td>
+                            <label class="dialog_label">Wort:</label><br />
+                            <input type="text" id="word" size="256" class="dialog_input">
+                        </td></tr>
+                    <tr><td align="right" style="padding-top: 5px;">
+                            <input type="button" value="Hinzufügen" id="buttonAdd" class="Button" onclick="addWord();" />
+                        </td></tr>
+                    <tr style="height:10px"><td><span style="font-size:8px">&nbsp;</span></td></tr>
+                    <tr><td>
+                            <label class="dialog_label">Wörterbuch:</label><br />
+                            <div id="dict" class="dialog_list"></div>
+                        </td></tr>
+                    <tr><td align="right" style="padding-top: 5px;">
+                            <input type="button" value="Löschen" id="buttonDelete" class="Button" onclick="deleteWord();" />
+                        </td></tr>
+                    <tr style="height:10px"><td><span style="font-size:8px">&nbsp;</span></td></tr>
+                    <tr><td>
+                            <label class="dialog_label">Sprache:</label><br />
+                            <select id="lang" size="1" class="dialog_popup" onchange="langOnChange();">
+                                <option value="neutr">alle Sprachen</option>
+                                <option value="de">Deutsch (Deutschland)</option>
+                                <option value="ch">Deutsch (Schweiz)</option>
+                                <option value="at">Deutsch (Österreich)</option>
+                                <option value="en">Englisch</option>
+                                <option value="gb">Englisch (Großbritannien)</option>
+                                <option value="us">Englisch (USA)</option>
+                                <option value="fr">Französisch</option>
+                                <option value="sp">Spanisch</option>
+                                <option value="it">Italienisch</option>
+                            </select>
+                        </td></tr>
+                    <tr style="height:30px"><td>
+                            <div class="dialog_divider">&nbsp;</div>
+                        </td></tr>
+                    <tr><td>
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                                    <td>
+                                        <span id="status" class="dialog_status"></span>
+                                    </td>
+                                    <td align="right" style="padding-top: 5px;">
+                                        <input type="button" value="Speichern" id="buttonSave" class="Button" onclick="saveDict();" />
+                                        <input type="button" value="Schließen" id="buttonClose" class="Button" onclick="closeOnClick();" />
+                                    </td>
+                                </tr></table>
+                        </td></tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

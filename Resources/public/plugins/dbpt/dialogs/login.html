@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+        <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+        <meta name="author" content="Macron Software (www.macronsoftware.com); petrj">
+        <meta name="copyright" content="Copyright (C) 2011 - Bibliographisches Institut GmbH, Mannheim, Germany. All rights reserved.">
+        <meta name="description" content="DBPT - login dialog">
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="../css/dbpt1_0.css">
+        <script src="../js/jquery.min.js" type="text/javascript"></script> 
+        <script src="../js/setup.js" type="text/javascript"></script>         
+        <script src="../js/jquery.cookie.js" type="text/javascript"></script>        
+        <script src="../js/cpaint2.inc.compressed.js" type="text/javascript"></script>
+        <script src="../js/dbpt1_0_ck.js" type="text/javascript"></script>
+        <script type="text/javascript">            
+            var confign = configp = '';
+            //kvuli FF - nastavim vysku iframu
+            var CKEDITOR   = window.parent.CKEDITOR;
+            var dialogElement = CKEDITOR.dialog.getCurrent().getElement().getFirst();
+            dialogElement.setStyle("height", "200px");
+
+            var wsUserName = wsPassword = null;
+            $(document).ready(function() {
+                confign = $.cookie("dpfws_name");
+                configp = $.cookie("dpfws_name");
+                init();
+            });
+            function init() {                
+                $("#name").val((confign) ? confign : null);
+                $("#pwd").val((configp) ? configp : null);
+            }
+           
+            function buttonSaveOnClick() {
+                var name = jQuery.trim($("#name").val());
+                var pwd = jQuery.trim($("#pwd").val());
+                
+                if (name.length == 0) {
+                    alert('Füllen Sie der Name aus.');
+                    return;
+                }
+                saveLoginInfo(name, pwd);
+            }           
+        </script>
+    </head>
+    <body>
+        <div align="center">
+            <form id="login" action="" onsubmit="return false">
+                <table cellpadding="0" cellspacing="0" border="0" align="center" style="width:425px">
+                    <tr><td>
+                            <label class="dialog_label">Name:</label><br />
+                            <input type="text" id="name" size="256" class="dialog_input">
+                        </td></tr>
+                    <tr style="height:10px"><td><span style="font-size:8px">&nbsp;</span></td></tr>
+                    <tr><td>
+                            <label class="dialog_label">Passwort:</label><br />
+                            <input type="password" id="pwd" size="256" class="dialog_input">
+                        </td></tr>
+                    <tr style="height:30px"><td>
+                            <div class="dialog_divider">&nbsp;</div>
+                        </td></tr>
+                    <tr><td>
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                                    <td align="right" style="padding-top: 5px;">
+                                        <input type="button" value="Daten speichern" id="buttonSave" class="Button" onclick="buttonSaveOnClick();" />
+                                    </td>
+                                </tr></table>
+                        </td></tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

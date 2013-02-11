@@ -1,0 +1,40 @@
+.err_msg{cursor:pointer;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#999;border:1px solid #D0D0D0;position:absolute;display:none;width:450px;height:250px;overflow:auto;text-align:left;padding:2px}
+.debug_link{color:#f09;text-decoration:underline;cursor:pointer;padding:2px}
+.debug_textarea{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt}
+.right_float{float:right;border:solid 1px #c00}
+.status{color:red;padding-left:150px;white-space:nowrap}
+.context_menu{background-color:#E8F1FF;border:1px solid #000;position:absolute;text-align:left;margin:0 5px 0 0;padding:2px}
+.menu_message{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#000}
+.menu_action{cursor:pointer;text-decoration:underline;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#900}
+.suggestion{cursor:pointer;text-decoration:underline;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;font-weight:700;color:#000}
+.correction_layer{border:solid 1px red}
+.correction_input{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;cursor:text}
+.corrected_word{color:#000}
+.addtoDictionary{background-color:#E8F1FF;cursor:pointer;text-decoration:underline;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#000}
+.edit_box{background-color:#FFF;color:#000;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;border:1px inset #000;padding-top:2px;padding-left:2px;overflow:auto}
+.edit_pre{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px}
+.text_box{background-color:#FFF;color:#000;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px}
+.no_misspellings{color:#093}
+.check_spelling{color:#06C;text-decoration:underline;cursor:pointer;padding:2px}
+.resume_editing{color:#093;text-decoration:underline;cursor:pointer}
+.dialog_base{text-align:center;padding:10px}
+.dialog_button{font-size:12px;width:135px;font-family:Verdana, Arial, Helvetica, sans-serif;margin:4px 0 2px 4px}
+.dialog_divider{width:100%;height:15px;border-bottom:solid 1px #000;border-bottom-color:#CCC}
+.dialog_list{width:100%;height:300px;border:solid 1px #CCC;overflow:auto}
+.dialog_row{width:100%;border-bottom:solid 1px #CCC;padding-top:2px;padding-bottom:2px}
+.userdic_item{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;width:98%;padding-left:2px;padding-right:2px;cursor:pointer}
+.exceptdic_row{width:100%;border-bottom:solid 1px #CCC}
+.exceptdic_left{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;width:50%;float:left;border-right:solid 1px #CCC;margin-left:2px;margin-right:2px;padding-top:2px;padding-bottom:2px;cursor:pointer}
+.exceptdic_right{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;padding-top:2px;padding-bottom:2px;cursor:pointer}
+.dpf_sent_err{color:#939;text-decoration:underline;cursor:pointer}
+.dpf_style{color:#00F;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;text-decoration:underline;cursor:pointer}
+.dpf_gram{color:#090;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;text-decoration:underline;cursor:pointer}
+.highlight,.dpf_orth{color:red;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:11px;text-decoration:underline;cursor:pointer}
+.dialog_label,.dialog_status{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px}
+.dialog_input,.dialog_popup{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;width:100%}
+h1,h1 .dpf_gram,h1 .dpf_orth{font-size:18px}
+h2,h2 .dpf_gram,h2 .dpf_orth{font-size:17px}
+h3,h3 .dpf_gram,h3 .dpf_orth{font-size:16px}
+h4,h4 .dpf_gram,h4 .dpf_orth{font-size:15px}
+h5,h5 .dpf_gram,h5 .dpf_orth{font-size:14px}
+h6,h6 .dpf_gram,h6 .dpf_orth{font-size:13px}

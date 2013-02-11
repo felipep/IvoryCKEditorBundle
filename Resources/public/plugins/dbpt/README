@@ -1,0 +1,173 @@
+Installation guidelines for “Duden Korrektor for CKEditor 3.x” for Resellers
+State April 2012
+
+Content
+1		Introduction
+2		System requirements
+3		Installation
+3.1		Web Server
+3.2		WYSIWYG editor
+3.3		Plug-in “Duden Korrektor for CKEditor 3.x”
+4		Configuration
+4.1		Configuration file
+4.1.1	DES Local
+4.1.2	Software as a Service
+4.2		“Duden Korrektor” Toolbar
+5		Read and write access for the Dictionary folder
+6		Adjusting Error Messages
+7		Usage of the “Duden Korrektor for CKEditor 3.x”
+8		For system integrators of “Duden Korrektor”
+
+1 Introduction
+CKEditor is a platform independent, web based JavaScript WYSIWYG editor. It has the ability to convert HTML-Textarea fields or other HTML-Elements to editor instances and is very easy to integrate into Content Management Systems. 
+   The “Duden Korrektor for CKEditor 3.x” is a powerful orthography and grammar correction plug-in for the german language and developed for users of WYSIWYG editors on web applications.
+   This document shows how the “Duden Korrektor for CKEditor 3.x” can be integrated into the CKEditor 3.x.
+
+2 System requirements
+* Operating System: Linux or Windows (tested on Open Suse 11.4,  Linux Ubuntu 10.04, WindowsXP)
+* Web Server: Apache2 (Tested on Windows with XAMPP)
+* Scripting Language: PHP 5.0 or greater (with pear and soap packages)
+* WYSIWYG editor: CKEditor version 3.x
+* Access to the Duden Enterprise Server (DES local installation or DES Software as a Service (SaaS) (registration on www.duden-saas.de))
+
+3 Installation
+3.1 Web Server 
+For Open Suse, the following packages are needed to be installed:
+
+//Packages for Apache on Open Suse 
+$ yast2 --install apache2
+$ yast2 --install apache2-mod_php5
+$ yast2 --install php5-pear-Net_DIME
+
+For Linux Ubuntu, the following packages are needed to be installed:
+
+// Packages for Apache on Linux Ubuntu 
+$ apt-get install apache2
+$ apt-get install php5
+$ apt-get install php-net-dime
+
+For XAMPP, the variable “display_errors” should be set off (display_errors = Off) in php.ini.
+
+3.2 WYSIWYG editor
+Download the CKEditor version 3.x from the site: http://ckeditor.com/download
+   
+Extract (unzip) the downloaded file into the document root folder:
+
+// on standard Open Suse installation
+/srv/www/htdocs$ unzip <<ckeditor_3.x>>.zip 
+
+// on standard Linux Ubuntu installation
+/var/www$ unzip <<ckeditor_3.x>>.zip
+
+You can check, if the installation of CKEditor is working, by trying to open an example file on the Browser:
+
+// on a standard installation
+ http://localhost/ckeditor/_samples/skins.html
+
+ 3.3 Plug-in “Duden Korrektor for CKEditor 3.x”
+The installation package contains PHP, JavaScript, HTML and XML files.
+Unzip the content of the dbpt.zip in the CKEditor plugin folder:
+
+// on standard Open Suse installation
+/srv/www/htdocs/ckeditor/plugins$ unzip dbpt.zip
+
+//on standard Linux Ubuntu installation
+/var/www/ckeditor/plugins$ unzip dbpt.zip
+
+4 Configuration
+4.1 Configuration file
+The configuration can be done either with a local DES or by using Software as a Service (Registration on www.duden-saas.de).
+// on standard Open Suse is the config.php file in 
+/srv/www/htdocs/ckeditor/plugins/dbpt/config.php
+
+// on standard Linux Ubuntu is the config.php file in 
+/var/www/ckeditor/plugins/dbpt/config.php
+4.1.1 DES Local
+Define the url of the DES service as well as the username and the password in the file config.php in the folder dbpt. If no user authentication is defined and the DES has a standard local installation, the config.php file could look as stated below:
+...
+define (‘DPFWS_WSDL_FILE_URL’, ‘http://localhost:8880/wsdl’)
+define (‘DPFWS_USERNAME’, ‘username’)
+define (‘DPFWS_PASSWORD’, ‘password’)
+...
+
+4.1.2 Software as a Service
+Define the url of the Saas-DES (http://www.duden-esf.de:8880/wsdl or https://www.duden-esf.de:9880/wsdl) as well as the username and the password in the file config.php in the folder dbpt. The username and the password are similar to the credentials of the registration on www.duden-saas.de. 
+...
+define (‘DPFWS_WSDL_FILE_URL’, ‘http://www.duden-esf.de:8880/wsdl’)
+define (‘DPFWS_USERNAME’, ‘duden-business_username’)
+define (‘DPFWS_PASSWORD’, ‘duden-business_password’)
+...
+   
+4.2 “Duden Korrektor” Toolbar
+The “Duden Korrektor” Toolbar can be configured in the file, where the editor is working, as follows:
+...
+<script type="text/javascript">
+//<![CDATA[
+CKEDITOR.replace( 'editor_kama', 
+{
+toolbar:[['DBPT', 'DBPT Options', 'DBPT Dictionary', 'DBPT Exceptions']], 
+extraPlugins:'dbpt'
+});
+//]]>
+</scrip
+...
+
+The installation package comes with an example file in the dbpt folder. The file can be called on the Browser in a standard installation as described below:
+   http://localhost/ckeditor/plugins/dbpt/test.html
+   
+// on standard Open Suse installation is the test file in 
+/srv/www/htdocs/ckeditor/plugins/dbpt/test.html
+
+// on standard Linux Ubuntu installation is the test file in 
+/var/www/ckeditor/plugins/dbpt/test.html
+
+5 Read and write access for the Dictionary folder
+The Dictionary folder is used for data dictionaries. The “dict” folder should be placed inside the dbpt folder. Make sure the Web Server has read and write access to this folder. If the folder does not exist, create it with appropriate read and write permissions. 
+// on standard Open Suse installation is the dict folder on 
+/srv/www/htdocs/ckeditor/plugins/dbpt/dict
+
+// on standard Linux Ubuntu installation is the dict folder on 
+/var/www/ckeditor/plugins/dbpt/dict
+
+This folder is obliged to have and write access for the Web Server, as the scripts create some text files in this directory.
+
+6 Adjusting Error Messages
+The "Duden Korrektor" checks, if: 
+* the username and/or password are valid;
+* the DES is reachable;
+* there are read/write rights on the dictionary folder;
+* the PHP and PEAR modules are installed.
+
+In the case of a failure, an error message is shown and informs the user about the problems. 
+
+As a reseller, it might be necessary to adjust the error messages for your specific purposes and in regard to your customers. In would therefore be advisable to add your support information to it. The error messages can easily be adapted in the file errors.xml (in the folder dbpt/xml).
+
+7 Usage of the “Duden Korrektor for CKEditor 3.x”
+For the usage of the “Duden Korrektor for CKEditor”, you may need to restart the Web Server and the Browser.
+// to restart the Apache Web Server on Open Suse:
+$ rcapache2 restart
+
+// to restart the Apache Web Server on Linux Ubuntu:
+$ /etc/init.d/apache2 restart
+
+The installation package comes with an example file in the dbpt folder, this file can be called on the Browser in a standard installation as follows:
+   http://localhost/ckeditor/plugins/dbpt/test.html
+   
+1. Type text in the edit area.
+2. Click on the “Korrektur starten” spellchecker button. The correction window opens and the text is going to be checked.
+3. Edit the text by using the “Duden Korrektor” features.
+4. Close the correction window by clicking on the left down icon, the edited text is going to be updated in the editor.
+8 
+For system integrators of “Duden Korrektor”
+The system integrators of „Duden Korrektor“ should save their ResellerId in the variable DPFWS_RESELLERID in the config.php file.
+
+Please remove the comments („//“) and save the ResellerId in the defined place („YOUR_RESELLERID“).
+
+...
+define('DPFWS_RESELLERAGENT', 'DBPT/1.0 (CKEditor 3.x) PHP');
+define('DPFWS_RESELLERURL', 'http://stats.duden-saas.de/Session/Start');
+/*Only for Resellers*/
+//define (‘DPFWS_RESELLERID’, ‘YOUR_RESELLERID’)
+...
+
+The ResellerId is going to be sent to the domain defined in the variable  „DPFWS_RESELLERURL“ and is going to be saved in our database.
